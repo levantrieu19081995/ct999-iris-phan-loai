@@ -2,7 +2,7 @@
 
 Lê Văn Triệu - M2526034. Bài thực hành 4, học phần CT999 - Công nghệ số nâng cao.
 
-Dự án đọc dữ liệu Iris từ UCI, kiểm tra và loại dòng trùng, so sánh bốn mô hình, rồi sử dụng kết quả để tạo báo cáo PDF, bài viết LaTeX, poster và PowerPoint.
+Dự án đọc dữ liệu Iris từ UCI, kiểm tra và loại dòng trùng, so sánh bốn mô hình, rồi sử dụng kết quả để tạo báo cáo PDF, bài viết LaTeX, poster và PowerPoint. Dashboard cho phép lọc loài, chọn biến và tải báo cáo từ dữ liệu đang xem.
 
 ## Dữ liệu và phương pháp
 
@@ -74,3 +74,32 @@ CV và test dùng các tập đánh giá khác nhau. Các con số chỉ mô t�
 Phần mã nguồn tự viết dùng **MIT**, xem [LICENSE](LICENSE). Dữ liệu Iris giữ **CC BY 4.0**. Các tệp của Springer giữ thông báo gốc và không được đổi thành MIT. Xem [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Thông tin trích dẫn dự án được lưu trong [CITATION.cff](CITATION.cff). Khi dùng dữ liệu, cần trích dẫn cả UCI Iris. Hướng dẫn đóng góp nằm trong [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Dashboard của mini-project nhóm
+
+Chạy trên Windows với Python 3.12. Cài môi trường riêng trước khi chạy lần đầu:
+
+```console
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m streamlit run src/dashboard.py --server.address 127.0.0.1 --server.port 8504
+```
+
+Mở `http://127.0.0.1:8504`. Tệp `scripts/5_Dashboard.cmd` dùng để mở lại sau khi đã cài thư viện. Muốn dừng, bấm Ctrl+C trong cửa sổ chạy.
+
+- Chọn một hoặc nhiều loài hoa ở bên trái. Dữ liệu đã làm sạch có 147 mẫu; chọn riêng setosa còn 48 mẫu.
+- Chọn trục X, trục Y trong bốn số đo. Biểu đồ phân tán dùng cả hai trục; biểu đồ phân bố dùng biến X; biểu đồ tương quan dùng cả bốn thuộc tính.
+- Tab Kết quả mô hình hiển thị kết quả đã chạy trên 102 mẫu huấn luyện và 45 mẫu kiểm tra. Chọn bộ lọc không huấn luyện lại mô hình.
+- Tab Tải báo cáo cho tải PDF hai trang và CSV đúng theo loài đang chọn. PDF dùng biểu đồ phân tán theo hai trục, có thống kê, kết quả mô hình và nhận xét. Có thêm nút tải PDF tổng hợp ban đầu.
+- Bỏ chọn tất cả loài sẽ hiện thông báo; chương trình không xuất báo cáo rỗng.
+
+Hai tệp chính là `src/dashboard.py` và `src/dashboard_data.py`. Chương trình kiểm tra mã băm CSV, số mẫu và số dự đoán đúng trước khi hiển thị kết quả.
+
+Kiểm thử các bộ lọc, trục, ba loại biểu đồ và PDF:
+
+```console
+.venv\Scripts\python -m pip install -r requirements-dev.txt
+.venv\Scripts\python -m pytest tests/test_dashboard.py -q
+```
+
+Ngày 20/11/2026: 5 kiểm thử đạt. Các ảnh thao tác và bản PDF tải thử được lưu trong bộ bài thực hành, ngoài thư mục mã nguồn.
