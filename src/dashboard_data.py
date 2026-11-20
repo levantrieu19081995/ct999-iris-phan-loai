@@ -115,7 +115,8 @@ def filtered_pdf(data, x, y, metrics, summary):
                       [[r['model'], f'{r["cv_f1_mean"]:.4f}', f'{r["test_accuracy"]:.4f}', f'{int(r["correct"])}/{int(r["test_n"])}'] for _, r in metrics.iterrows()],
                       [55*mm, 40*mm, 40*mm, 30*mm]),
                 p('4 Nhận xét', head),
-                p(f'Bộ lọc hiện có {len(data)} mẫu thuộc {len(selected)} loài. Biểu đồ và bảng thống kê phía trên được tạo lại từ đúng các mẫu này. Kết quả mô hình chỉ mô tả lần chia dữ liệu đã lưu; tập kiểm tra nhỏ nên chưa đủ kết luận một mô hình luôn tốt hơn.')]
+                p(f'Bộ lọc hiện có {len(data)} mẫu thuộc {len(selected)} loài. Biểu đồ và bảng thống kê phía trên được tạo lại từ đúng các mẫu này. Kết quả mô hình chỉ mô tả lần chia dữ liệu đã lưu; tập kiểm tra nhỏ nên chưa đủ kết luận một mô hình luôn tốt hơn.'),
+                p('Hướng tiếp theo là thử nhiều lần chia dữ liệu và bổ sung dữ liệu để kiểm tra độ ổn định của kết quả.')]
     output = BytesIO()
     def footer(canvas, _):
         canvas.setFont('Iris', 9); canvas.drawRightString(A4[0]-18*mm, 12*mm, str(canvas.getPageNumber()))
